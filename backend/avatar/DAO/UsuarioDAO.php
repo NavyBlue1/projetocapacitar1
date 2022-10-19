@@ -3,7 +3,7 @@
 class UsuarioDAO {
     
     function adicionarUsuario(ModelUsuario $usuario){
-        require_once('../conexao/config.php');
+        include('./conexao/config.php');
         
 
         $nome = $usuario->getNome();
@@ -26,8 +26,8 @@ class UsuarioDAO {
         $stmt-> bindParam(':email',$email);
         $stmt-> bindParam(':genero',$genero);
         $stmt-> bindParam(':dataNascimento',$datanacimento);
-
         $stmt->execute();
+        
         if($stmt == true){
             echo "Dados inseridos!";
         }
