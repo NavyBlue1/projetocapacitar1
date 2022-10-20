@@ -1,19 +1,15 @@
-class id{
-    id = 0
-}
 function novoInput(pai, button, placeholder,limite) {
 
-    idBtn = new id()
-    console.log(this.idBtn)
-    // Criando um id único para cada elemento
-    idAtual = idBtn
+    number = parseInt(button.getAttribute("data-number"))
+    number += 1
+    button.setAttribute("data-number",number)
+    console.log(number)
 
     // Criando o div que englobará os elementos novos, desta forma todos podem ser apagados de uma vez
     div = newElement('div')
-    div.id = idAtual
+    div.id = number
 
     botaoAdd = button
-
 
     // Caixa de texto
     caixa = newElement('input')
@@ -26,9 +22,9 @@ function novoInput(pai, button, placeholder,limite) {
     botaoDelete = newElement('button')
     botaoDelete.innerHTML = "-"
     botaoDelete.type = "button"
-    botaoDelete.id = idAtual
+    botaoDelete.id = number
     botaoDelete.setAttribute("class", "botao")
-    botaoDelete.onclick = function () { removeElement(pai, document.getElementById(this.id)); }
+    botaoDelete.onclick = function () {console.log(this);removeElement(pai, button, document.getElementById(this.id)); }
 
     // Elemento para quebra de linha 
     lineBreak = newElement('br')
@@ -39,7 +35,7 @@ function novoInput(pai, button, placeholder,limite) {
     div.appendChild(botaoDelete)
 
     // Desabilitar botão de adicionar
-    if (idAtual >= limite) {
+    if (number >= limite) {
         botaoAdd.disabled = true;
     }
 }
@@ -51,16 +47,18 @@ function newElement(elementType) {
 }
 
 // Apagar elemento
-function removeElement(pai, element) {
+function removeElement(pai, button, element) {
     
     botaoAdd = button
+    number = this.id
 
     pai.removeChild(element)
     
-    globalThis.id -= 1
+    number -= 1
+    botaoAdd.setAttribute("data-number",number)
 
     // Reabilitar botão de adicionar
-    if(globalThis.id <= 2){
+    if(number <= 2){
         botaoAdd.disabled = false;
     }
 }
