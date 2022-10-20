@@ -49,8 +49,7 @@ span{
 input{
     margin-bottom: 10%;
 }
-.botao{
-    position: fixed;
-    top: 20px;
-    color: black;
+
+select option{
+    color:black;
 }
